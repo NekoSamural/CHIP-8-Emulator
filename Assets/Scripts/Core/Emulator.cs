@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chip8.Sound;
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Chip8.Core
 {
     public class Emulator : MonoBehaviour
     {
+        [SerializeField] private Audio _audio;
         [SerializeField] private string _romFileName;
 
         private const float CPU_FREQUENCY = 700f;
@@ -40,8 +42,20 @@ namespace Chip8.Core
             float deltaTime = Time.unscaledDeltaTime;
 
             UpdateProcessor(deltaTime);
+            UpdateAudio();
             UpdateTimers(deltaTime);
-            Debug.Log($"0x{_processor.GetRegister(0x3):X2}");
+        }
+
+        private void UpdateAudio()
+        {
+            if (_processor.IsSoundActive)
+            {
+                _audio.Play();
+            }
+            else
+            {
+                _audio.Stop();
+            }
         }
 
         public void LoadRom(string fileName)

@@ -6,6 +6,8 @@ namespace Chip8.Core
     {
         public const ushort PROGRAM_START_ADDRESS = 0x200;
 
+        public bool IsSoundActive => _soundTimer > 0;
+
         private readonly Memory _memory;
         private readonly Display _display;
         private readonly Keyboard _keyboard;
