@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Chip8.UI;
+using UnityEngine;
 
 namespace Chip8.Core
 {
@@ -8,8 +9,9 @@ namespace Chip8.Core
         private const float TIMER_FREQUENCY = 60f;
         private const int MAX_INSTRUCTIONS_PER_FRAME = 100;
 
+        public Display Display { get; private set; }
+
         private Memory _memory;
-        private Display _display;
         private Keyboard _keyboard;
         private Processor _processor;
 
@@ -20,17 +22,24 @@ namespace Chip8.Core
         public void Awake()
         {
             _memory = new();
-            _display = new();
+            Display = new();
             _keyboard = new();
-            _processor = new Processor(_memory, _display, _keyboard);
+            _processor = new Processor(_memory, Display, _keyboard);
         }
 
         private void Start()
         {
-            LoadProgram(new byte[] 
+            LoadProgram(new byte[]
             {
-                0xF3, 0x0A, // ждать клавишу → V3
-                0x63, 0xFF  // V3 = FF
+                0x63, 0x0A, // V3 = 0xA
+                0xF3, 0x29, // I = адрес спрайта A
+
+                0x61, 0x0A, // V1 = 10
+                0x62, 0x05, // V2 = 5
+
+                0xD1, 0x25, // Draw(V1, V2, 5)
+
+                0x12, 0x0A  // Jump 0x20A
             });
         }
 

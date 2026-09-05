@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
 
 namespace Chip8.Core
 {
-    public class Display : MonoBehaviour
+    public class Display
     {
         public const int WIDTH = 64;
         public const int HEIGHT = 32;
