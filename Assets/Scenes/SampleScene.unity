@@ -210,7 +210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 2
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -423,7 +422,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 1
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -962,7 +960,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 10
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -1620,7 +1617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 7
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -1869,7 +1865,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 15
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -2343,6 +2338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c63c3d0f952fe14895898b03e6ef717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.Emulator
+  _romFileName: br8kout.ch8
 --- !u!1 &1141289143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,7 +2535,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 4
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -3060,7 +3055,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 11
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -3170,7 +3164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 5
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -3417,7 +3410,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 13
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -3664,7 +3656,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 0
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -3774,7 +3765,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 6
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -3884,7 +3874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 8
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -3994,7 +3983,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 3
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -4104,7 +4092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 9
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -4214,7 +4201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 14
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}
@@ -4324,7 +4310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Chip8.UI.Key
   _emulator: {fileID: 1104157622}
-  _image: {fileID: 0}
   _chip8KeyCode: 12
   _idle: {r: 0.10980393, g: 0.13333334, b: 0.13333334, a: 1}
   _pressed: {r: 0.19188234, g: 0.233, b: 0.233, a: 1}

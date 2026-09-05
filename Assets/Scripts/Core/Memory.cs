@@ -4,7 +4,7 @@ namespace Chip8.Core
 {
     public class Memory
     {
-        private const int MEMORY_SIZE = 4096;
+        public const int MEMORY_SIZE = 4096;
         private readonly byte[] _memory = new byte[MEMORY_SIZE];
 
         public const ushort FONT_START_ADDRESS = 0x050;

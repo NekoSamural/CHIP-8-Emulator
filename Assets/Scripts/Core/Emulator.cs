@@ -1,10 +1,13 @@
-﻿using Chip8.UI;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace Chip8.Core
 {
     public class Emulator : MonoBehaviour
     {
+        [SerializeField] private string _romFileName;
+
         private const float CPU_FREQUENCY = 700f;
         private const float TIMER_FREQUENCY = 60f;
         private const int MAX_INSTRUCTIONS_PER_FRAME = 100;
@@ -19,7 +22,7 @@ namespace Chip8.Core
         private float _timerAccumulator;
 
 
-        public void Awake()
+        private void Awake()
         {
             _memory = new();
             Display = new();
@@ -29,18 +32,7 @@ namespace Chip8.Core
 
         private void Start()
         {
-            LoadProgram(new byte[]
-            {
-                0x63, 0x0A, // V3 = 0xA
-                0xF3, 0x29, // I = адрес спрайта A
-
-                0x61, 0x0A, // V1 = 10
-                0x62, 0x05, // V2 = 5
-
-                0xD1, 0x25, // Draw(V1, V2, 5)
-
-                0x12, 0x0A  // Jump 0x20A
-            });
+            LoadRom(_romFileName);
         }
 
         private void Update()
@@ -50,6 +42,57 @@ namespace Chip8.Core
             UpdateProcessor(deltaTime);
             UpdateTimers(deltaTime);
             Debug.Log($"0x{_processor.GetRegister(0x3):X2}");
+        }
+
+        public void LoadRom(string fileName)
+        {
+            string path = Path.Combine(Application.streamingAssetsPath, "Roms", fileName);
+
+            if (!File.Exists(path))
+            {
+                Debug.LogError($"ROM не найден: {path}");
+                return;
+            }
+
+            byte[] rom = File.ReadAllBytes(path);
+
+            Debug.Log($"ROM загружен: {fileName}, размер: {rom.Length} bytes");
+
+            LoadProgram(rom);
+        }
+
+        public void LoadProgram(byte[] program)
+        {
+            int maxProgramSize = Memory.MEMORY_SIZE - Processor.PROGRAM_START_ADDRESS;
+
+            if (program.Length > maxProgramSize)
+            {
+                throw new ArgumentException($"ROM слишком большой: {program.Length} bytes. Максимум: {maxProgramSize} bytes.");
+            }
+
+            _memory.Reset();
+            _processor.Reset();
+            _keyboard.Reset();
+            Display.Clear();
+
+            _cpuAccumulator = 0;
+            _timerAccumulator = 0;
+
+            for (int i = 0; i < program.Length; i++)
+            {
+                _memory.Write((ushort)(Processor.PROGRAM_START_ADDRESS + i), program[i]);
+            }
+            _memory.Write(0x1FF, 1);
+        }
+
+        public void DownKey(KeyCode chip8Key)
+        {
+            _keyboard.SetKey((byte)chip8Key, true);
+        }
+
+        public void UpKey(KeyCode chip8Key)
+        {
+            _keyboard.SetKey((byte)chip8Key, false);
         }
 
         private void UpdateProcessor(float deltaTime)
@@ -74,30 +117,9 @@ namespace Chip8.Core
 
             while (_timerAccumulator >= timerInterval)
             {
-                _processor.TickTimers();
+                _processor.Tick60Hz();
                 _timerAccumulator -= timerInterval;
             }
-        }
-
-        public void LoadProgram(byte[] program)
-        {
-            _memory.Reset();
-            _processor.Reset();
-
-            for (int i = 0; i < program.Length; i++)
-            {
-                _memory.Write((ushort)(Processor.PROGRAM_START_ADDRESS + i), program[i]);
-            }
-        }
-
-        public void DownKey(KeyCode chip8Key)
-        {
-            _keyboard.SetKey((byte)chip8Key, true);
-        }
-
-        public void UpKey(KeyCode chip8Key)
-        {
-            _keyboard.SetKey((byte)chip8Key, false);
         }
     }
 }

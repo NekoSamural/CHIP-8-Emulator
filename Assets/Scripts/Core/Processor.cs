@@ -20,6 +20,9 @@ namespace Chip8.Core
         private ushort _programCounter;
         private int _waitingForKeyRegister = -1;
 
+        private bool _displayReady;
+        private bool _waitingForDisplay;
+
         private byte _delayTimer;
         private byte _soundTimer;
 
@@ -45,6 +48,9 @@ namespace Chip8.Core
 
             _delayTimer = 0;
             _soundTimer = 0;
+
+            _displayReady = false;
+            _waitingForDisplay = false;
         }
 
         public void Step()
@@ -55,11 +61,16 @@ namespace Chip8.Core
                 return;
             }
 
+            if (_waitingForDisplay)
+            {
+                return;
+            }
+
             ushort opcode = Fetch();
             Execute(opcode);
         }
 
-        public void TickTimers()
+        public void Tick60Hz()
         {
             if (_delayTimer > 0)
             {
@@ -70,6 +81,9 @@ namespace Chip8.Core
             {
                 _soundTimer--;
             }
+
+            _displayReady = true;
+            _waitingForDisplay = false;
         }
 
         public byte GetRegister(int index)
@@ -201,14 +215,17 @@ namespace Chip8.Core
 
                 case 0x0001:
                     _registers[x] |= _registers[y];
+                    _registers[0xF] = 0;
                     break;
 
                 case 0x0002:
                     _registers[x] &= _registers[y];
+                    _registers[0xF] = 0;
                     break;
 
                 case 0x0003:
                     _registers[x] ^= _registers[y];
+                    _registers[0xF] = 0;
                     break;
 
                 case 0x0004:
@@ -424,6 +441,15 @@ namespace Chip8.Core
 
         private void ExecuteDraw(ushort opcode)
         {
+            if (!_displayReady)
+            {
+                _programCounter -= 2;
+                _waitingForDisplay = true;
+                return;
+            }
+
+            _displayReady = false;
+
             int xRegister = (opcode & 0x0F00) >> 8;
             int yRegister = (opcode & 0x00F0) >> 4;
             int height = opcode & 0x000F;
@@ -447,14 +473,12 @@ namespace Chip8.Core
                 for (int column = 0; column < 8; column++)
                 {
                     int screenX = startX + column;
-
                     if (screenX >= Display.WIDTH)
                     {
                         break;
                     }
 
                     int mask = 0x80 >> column;
-
                     if ((spriteByte & mask) == 0)
                     {
                         continue;
